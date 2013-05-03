@@ -10,7 +10,6 @@ use Queue\Options;
 use Http\Get;
 use Http\Post;
 
-
 class Queue
 {
     private $name = '';
