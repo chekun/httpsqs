@@ -18,7 +18,7 @@ class Queue
     private $charset = 'utf-8';
     private $url = '';
 
-	public function __construct(
+    public function __construct(
         $queue_name = '',
         $host = '127.0.0.1', 
         $port = 1218, 
