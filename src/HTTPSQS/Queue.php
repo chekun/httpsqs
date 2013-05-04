@@ -44,7 +44,7 @@ class Queue
             if ($result === Status::$HTTPSQS_PUT_OK) {
                 return true;
             } elseif ($result === Status::$HTTPSQS_PUT_END) {
-                return $result["data"];
+                return Status::$HTTPSQS_PUT_END;
             } else {
                 return false;
             }
