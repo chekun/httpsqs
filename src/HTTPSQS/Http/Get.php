@@ -1,14 +1,14 @@
 <?php 
 namespace HTTPSQS\Http;
 
-use Context;
+use HTTPSQS\Http\Context;
 
 class Get
 {
 
-    public static function fetch($url)
+    public static function request($url)
     {
-        return file_get_contents($url, 0, new Context());
+        return file_get_contents($url, 0, Context::makeGet());
     }
 
 }

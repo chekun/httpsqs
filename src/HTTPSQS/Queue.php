@@ -1,14 +1,14 @@
 <?php 
 namespace HTTPSQS;
 
-use Exception\InvalidQueueNameException;
-use Exception\InvalidDataException;
-use Exception\InvalidPositionException;
-use Exception\InvalidLengthException;
-use Queue\Status;
-use Queue\Options;
-use Http\Get;
-use Http\Post;
+use HTTPSQS\Exception\InvalidQueueNameException;
+use HTTPSQS\Exception\InvalidDataException;
+use HTTPSQS\Exception\InvalidPositionException;
+use HTTPSQS\Exception\InvalidLengthException;
+use HTTPSQS\Queue\Status;
+use HTTPSQS\Queue\Options;
+use HTTPSQS\Http\Get;
+use HTTPSQS\Http\Post;
 
 class Queue
 {
@@ -31,7 +31,7 @@ class Queue
             $this->host = $host;
             $this->port = $port;
             $this->charset = $charset;
-            $this->url = $this->host.':'.$this->port.'?charset='.$this->charset.'&name='.$this->name.'&opt=';
+            $this->url = 'http://'.$this->host.':'.$this->port.'?charset='.$this->charset.'&name='.$this->name.'&opt=';
         }
     }
 
@@ -40,10 +40,10 @@ class Queue
         if (!is_string($data)) {
             throw new InvalidDataException();
         } else {
-            $result = Post::fetch($this->url.Options::$PUT, $data);
-            if ($result["data"] === Status::$HTTPSQS_PUT_OK) {
+            $result = Post::request($this->url.Options::$PUT, $data);
+            if ($result === Status::$HTTPSQS_PUT_OK) {
                 return true;
-            } elseif ($result["data"] === Status::$HTTPSQS_PUT_END) {
+            } elseif ($result === Status::$HTTPSQS_PUT_END) {
                 return $result["data"];
             } else {
                 return false;
@@ -53,18 +53,8 @@ class Queue
 
     public function shift()
     {
-        $result = $this->item();
-        if ($result !== false) {
-            return $result["data"];
-        } else {
-            return false;
-        }
-    }
-
-    public function item()
-    {
-        $result = Get::fetch($this->url.Options::$GET);
-        if ($result["data"] == Status::HTTPSQS_ERROR or $result["data"] == false) {
+        $result = Get::request($this->url.Options::$GET);
+        if ($result == Status::$HTTPSQS_ERROR or $result == false) {
             return false;
         }
         return $result;
@@ -72,11 +62,11 @@ class Queue
 
     public function status()
     {
-        $result = Get::fetch($this->url.Options::$STATUS);
-        if ($result["data"] == Status::HTTPSQS_ERROR or $result["data"] == false) {
+        $result = Get::request($this->url.Options::$STATUS);
+        if ($result == Status::$HTTPSQS_ERROR or $result == false) {
             return false;
         }
-        return $result["data"];
+        return $result;
     }
 
     public function view($position)
@@ -84,18 +74,18 @@ class Queue
         if (!is_int($position)) {
             throw new InvalidPositionException();
         } else {
-            $result = Get::fetch($this->url.Options::$VIEW.'&pos='.$position);
-            if ($result["data"] == Status::HTTPSQS_ERROR or $result["data"] == false) {
+            $result = Get::request($this->url.Options::$VIEW.'&pos='.$position);
+            if ($result == Status::$HTTPSQS_ERROR or $result == false) {
                 return false;
             }
-            return $result["data"];
+            return $result;
         }
     }
 
     public function reset()
     {
-        $result = Get::fetch($this->url.Options::$RESET);
-        if ($result["data"] == Status::HTTPSQS_RESET_OK) {
+        $result = Get::request($this->url.Options::$RESET);
+        if ($result == Status::$HTTPSQS_RESET_OK) {
             return true;
         }
         return false;
@@ -106,8 +96,8 @@ class Queue
         if (!is_int($length)) {
             throw new Exception("Queue Length must be int!");
         } else {
-            $result = Get::fetch($this->url.Options::$MAX_QUEUE.'&num='.$length);
-            if ($result["data"] == Status::HTTPSQS_MAXQUEUE_OK) {
+            $result = Get::request($this->url.Options::$MAX_QUEUE.'&num='.$length);
+            if ($result == Status::$HTTPSQS_MAXQUEUE_OK) {
                 return true;
             }
             return false;
