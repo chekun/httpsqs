@@ -19,15 +19,15 @@ class Queue
     private $url = '';
 
     public function __construct(
-        $queue_name = '',
+        $queueName = '',
         $host = '127.0.0.1', 
         $port = 1218, 
         $charset = 'utf-8'
     ) {
-        if (!$queue_name) {
+        if (!$queueName) {
             throw new InvalidQueueNameException();
         } else {
-            $this->name = $queue_name;
+            $this->name = $queueName;
             $this->host = $host;
             $this->port = $port;
             $this->charset = $charset;
