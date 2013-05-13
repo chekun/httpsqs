@@ -3,10 +3,10 @@ namespace HTTPSQS\Queue;
 
 class Options
 {
-    public static $PUT = 'put';
-    public static $GET = 'get';
-    public static $RESET = 'reset';
-    public static $VIEW = 'view';
-    public static $STATUS = 'status';
-    public static $MAX_QUEUE = 'maxqueue';
+    const PUT = 'put';
+    const GET = 'get';
+    const RESET = 'reset';
+    const VIEW = 'view';
+    const STATUS = 'status';
+    const MAX_QUEUE = 'maxqueue';
 }

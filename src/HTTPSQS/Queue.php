@@ -40,11 +40,11 @@ class Queue
         if (!is_string($data)) {
             throw new InvalidDataException();
         } else {
-            $result = Post::request($this->url.Options::$PUT, $data);
-            if ($result === Status::$HTTPSQS_PUT_OK) {
+            $result = Post::request($this->url.Options::PUT, $data);
+            if ($result === Status::HTTPSQS_PUT_OK) {
                 return true;
-            } elseif ($result === Status::$HTTPSQS_PUT_END) {
-                return Status::$HTTPSQS_PUT_END;
+            } elseif ($result === Status::HTTPSQS_PUT_END) {
+                return Status::HTTPSQS_PUT_END;
             } else {
                 return false;
             }
@@ -53,8 +53,8 @@ class Queue
 
     public function shift()
     {
-        $result = Get::request($this->url.Options::$GET);
-        if ($result == Status::$HTTPSQS_ERROR or $result == false) {
+        $result = Get::request($this->url.Options::GET);
+        if ($result == Status::HTTPSQS_ERROR or $result == false) {
             return false;
         }
         return $result;
@@ -62,8 +62,8 @@ class Queue
 
     public function status()
     {
-        $result = Get::request($this->url.Options::$STATUS);
-        if ($result == Status::$HTTPSQS_ERROR or $result == false) {
+        $result = Get::request($this->url.Options::STATUS);
+        if ($result == Status::HTTPSQS_ERROR or $result == false) {
             return false;
         }
         return $result;
@@ -74,8 +74,8 @@ class Queue
         if (!is_int($position)) {
             throw new InvalidPositionException();
         } else {
-            $result = Get::request($this->url.Options::$VIEW.'&pos='.$position);
-            if ($result == Status::$HTTPSQS_ERROR or $result == false) {
+            $result = Get::request($this->url.Options::VIEW.'&pos='.$position);
+            if ($result == Status::HTTPSQS_ERROR or $result == false) {
                 return false;
             }
             return $result;
@@ -84,8 +84,8 @@ class Queue
 
     public function reset()
     {
-        $result = Get::request($this->url.Options::$RESET);
-        if ($result == Status::$HTTPSQS_RESET_OK) {
+        $result = Get::request($this->url.Options::RESET);
+        if ($result == Status::HTTPSQS_RESET_OK) {
             return true;
         }
         return false;
@@ -96,8 +96,8 @@ class Queue
         if (!is_int($length)) {
             throw new Exception("Queue Length must be int!");
         } else {
-            $result = Get::request($this->url.Options::$MAX_QUEUE.'&num='.$length);
-            if ($result == Status::$HTTPSQS_MAXQUEUE_OK) {
+            $result = Get::request($this->url.Options::MAX_QUEUE.'&num='.$length);
+            if ($result == Status::HTTPSQS_MAXQUEUE_OK) {
                 return true;
             }
             return false;
