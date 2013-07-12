@@ -17,11 +17,13 @@ class Queue
     private $port = 1218;
     private $charset = 'utf-8';
     private $url = '';
+    private $auth = '';
 
     public function __construct(
         $queueName = '',
         $host = '127.0.0.1', 
         $port = 1218, 
+        $auth = '',
         $charset = 'utf-8'
     ) {
         if (!$queueName) {
@@ -31,7 +33,8 @@ class Queue
             $this->host = $host;
             $this->port = $port;
             $this->charset = $charset;
-            $this->url = 'http://'.$this->host.':'.$this->port.'?charset='.$this->charset.'&name='.$this->name.'&opt=';
+            $this->auth = $auth;
+            $this->url = 'http://'.$this->host.':'.$this->port.'?auth='.$this->auth.'&charset='.$this->charset.'&name='.$this->name.'&opt=';
         }
     }
 
