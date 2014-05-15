@@ -4,6 +4,10 @@ php:
   - 5.3
 
 before_script:
+  - cd /tmp
+  - curl -O http://httpsqs.googlecode.com/files/libevent-2.0.12-stable.tar.gz
+  - tar zxvf libevent-2.0.12-stable.tar.gz
+  - cd libevent-2.0.12-stable/ && ./configure --prefix=/usr/local/libevent-2.0.12-stable/ && make && make install && cd ../
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev
 
