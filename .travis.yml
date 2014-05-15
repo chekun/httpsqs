@@ -8,6 +8,9 @@ before_script:
   - curl -O http://httpsqs.googlecode.com/files/libevent-2.0.12-stable.tar.gz
   - tar zxvf libevent-2.0.12-stable.tar.gz
   - cd libevent-2.0.12-stable/ && ./configure --prefix=/usr/local/libevent-2.0.12-stable && make && sudo make install && cd ../
+  - curl -O http://httpsqs.googlecode.com/files/tokyocabinet-1.4.47.tar.gz
+  - tar zxvf tokyocabinet-1.4.47.tar.gz
+  - cd tokyocabinet-1.4.47/ && ./configure --prefix=/usr/local/tokyocabinet-1.4.47/ && make && sudo make install && cd ../
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev
 
