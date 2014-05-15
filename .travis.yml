@@ -4,6 +4,7 @@ php:
   - 5.3
 
 before_script:
+  - pwd
   - cd /tmp
   - curl -O http://httpsqs.googlecode.com/files/libevent-2.0.12-stable.tar.gz
   - tar zxvf libevent-2.0.12-stable.tar.gz
@@ -11,6 +12,9 @@ before_script:
   - curl -O http://httpsqs.googlecode.com/files/tokyocabinet-1.4.47.tar.gz
   - tar zxvf tokyocabinet-1.4.47.tar.gz
   - cd tokyocabinet-1.4.47/ && ./configure --prefix=/usr/local/tokyocabinet-1.4.47/ && make && sudo make install && cd ../
+  - curl -O http://httpsqs.googlecode.com/files/httpsqs-1.7.tar.gz
+  - tar zxvf httpsqs-1.7.tar.gz
+  - cd httpsqs-1.7/ && make && sudo make install && cd ../
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev
 
