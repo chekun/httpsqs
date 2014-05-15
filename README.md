@@ -1,5 +1,7 @@
 # php wrapper for [httpsqs](http://code.google.com/p/httpsqs/)
 
+[![Build Status](https://travis-ci.org/chekun/httpsqs.svg?branch=master)](https://travis-ci.org/chekun/httpsqs)
+
 # How to use
 
 ```php
