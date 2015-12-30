@@ -1,6 +1,6 @@
 {
     "name": "chekun/httpsqs",
-    "version": "0.0.1",
+    "version": "1.0.1",
     "description": "php wrapper for httpsqs",
     "keywords": ["httpsqs", "queue", "psr-3"],
     "homepage": "http://github.com/chekun/httpsqs",
